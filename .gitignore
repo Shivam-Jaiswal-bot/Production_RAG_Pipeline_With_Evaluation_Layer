@@ -1,0 +1,45 @@
+# ---- Secrets ----
+.env
+.env.local
+.env.*.local
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ---- Node ----
+node_modules/
+dist/
+.vite/
+*.log
+npm-debug.log*
+
+# ---- Project data (regeneratable) ----
+backend/data/filings/*
+!backend/data/filings/.gitkeep
+backend/data/chroma/*
+!backend/data/chroma/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+
+# ---- IDE / OS / tooling state ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.claude/
+
+# ---- Build artifacts ----
+build/
+*.egg
