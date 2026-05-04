@@ -21,7 +21,12 @@ services:
       retries: 5
       start_period: 20s
 
+  # The frontend dev server runs natively on the host (`make frontend`) on
+  # macOS — Docker Desktop's VirtioFS bind-mounts hit EDEADLK errors when
+  # Node reads mounted files. The frontend Dockerfile is kept for CI / prod.
+  # On Linux you can run it via `docker compose --profile docker-fe up`.
   frontend:
+    profiles: ["docker-fe"]
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -30,15 +35,6 @@ services:
       - "5173:5173"
     environment:
       VITE_API_URL: http://backend:8000
-    volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/index.html:/app/index.html
-      - ./frontend/vite.config.ts:/app/vite.config.ts
-      - ./frontend/tailwind.config.js:/app/tailwind.config.js
-      - ./frontend/postcss.config.js:/app/postcss.config.js
-      - ./frontend/tsconfig.json:/app/tsconfig.json
-      - ./frontend/tsconfig.node.json:/app/tsconfig.node.json
-      - frontend_node_modules:/app/node_modules
     depends_on:
       - backend
     networks:
@@ -50,4 +46,3 @@ networks:
 
 volumes:
   backend_venv:
-  frontend_node_modules:

@@ -40,7 +40,7 @@ cp .env.example .env
 make dev
 ```
 
-Once the containers are up:
+`make dev` starts the **backend in Docker** (`:8000`) and the **Vite dev server natively** (`:5173`). On macOS, running Vite natively avoids Docker Desktop's VirtioFS bind-mount issues (`EDEADLK` on `package.json` / config files); on Linux you can run both in Docker via `make frontend-docker`. You'll need Node 20+ and `npm` locally for the native frontend path.
 
 | Service | URL |
 |---|---|
